@@ -9,6 +9,10 @@ app.listen(process.env.PORT || 3000, () => {
     console.log("server started");
 });
 
+app.get("/return", async (req, res) => {
+    console.log("return");
+    res.send("Bot has been invited to the channel.");
+});
 
 const client = new Client({
     intents:['Guilds','GuildMembers','GuildMessages','MessageContent']
@@ -28,6 +32,16 @@ client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
     if (!message.content.startsWith(IGNORE_PREFIX)) return;
     if (!CHANNELS.includes(message.channel.id) && !message.mentions.has(client.user.id)) return;
+
+    if (message.content.trim() === "!inv") {
+        const options = {
+            method: 'GET',
+            url: 'https://chatbotdiscord-xoeb.onrender.com',
+          };
+        const response = await axios.request(options).catch((error) => console.error("OpenAI Error:\n",error));
+        message.reply(response);
+        return;
+    }
 
     await message.channel.sendTyping();
 
@@ -84,5 +98,6 @@ client.on("messageCreate", async (message) => {
     console.log(response.data.result);
     message.reply(response.data.result)
 });
+
 
 client.login(process.env.TOKEN);
