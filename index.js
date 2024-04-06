@@ -81,6 +81,7 @@ client.on("messageCreate", async (message) => {
         message.reply("Xin lỗi, tôi không thể trả lời câu hỏi của bạn lúc này. Hãy thử lại sau.");
         return;
     }
+    console.log(response.data.result);
     message.reply(response.data.result)
 });
 
