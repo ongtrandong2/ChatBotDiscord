@@ -1,14 +1,19 @@
 require('dotenv/config');
 const { Client } = require("discord.js");
 const axios = require('axios');
+const express = require('express');
+const app = express();
+
 
 app.listen(process.env.PORT || 3000, () => {
     console.log("server started");
-  });
+});
+
 
 const client = new Client({
     intents:['Guilds','GuildMembers','GuildMessages','MessageContent']
 });
+
 
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}`);
