@@ -9,7 +9,7 @@ app.listen(process.env.PORT || 3000, () => {
     console.log("server started");
 });
 
-app.get("/return", async (req, res) => {
+app.post("/return", async (req, res) => {
     console.log("return");
     res.send("Bot has been invited to the channel.");
 });
@@ -30,18 +30,18 @@ const CHANNELS = ["1225835289960779871","1225835289960779872","12258352899607798
 
 client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
-    if (!message.content.startsWith(IGNORE_PREFIX)) return;
     if (!CHANNELS.includes(message.channel.id) && !message.mentions.has(client.user.id)) return;
-
+    const optionReturn = {
+        method: 'POST',
+        url: 'https://chatbotdiscord-xoeb.onrender.com/return',
+      };
     if (message.content.trim() === "!inv") {
-        const options = {
-            method: 'GET',
-            url: 'https://chatbotdiscord-xoeb.onrender.com/return',
-          };
-        const response = await axios.request(options).catch((error) => console.error("OpenAI Error:\n",error));
-        message.reply(response);
+        const responseReturn = await axios.request(optionReturn).catch((error) => console.error("OpenAI Error:\n",error));
+        message.reply(responseReturn);
+        console.log(responseReturn);
         return;
     }
+    if (!message.content.startsWith(IGNORE_PREFIX)) return;
 
     await message.channel.sendTyping();
 
@@ -50,7 +50,6 @@ client.on("messageCreate", async (message) => {
     }, 5000);
 
     let conversation = [];
-
     conversation.push({role: "system", content: "Chào Đông và những người bạn của Đông, Tôi có thể giúp gì cho bạn hôm nay?"});
 
     let previousMessage = await message.channel.messages.fetch({limit: 10});
@@ -98,6 +97,4 @@ client.on("messageCreate", async (message) => {
     console.log(response.data.result);
     message.reply(response.data.result)
 });
-
-
 client.login(process.env.TOKEN);
