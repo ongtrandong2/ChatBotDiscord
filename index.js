@@ -53,11 +53,11 @@ client.on("messageCreate", async (message) => {
 
     const options = {
         method: 'POST',
-        url: 'https://chatgpt-42.p.rapidapi.com/conversationgpt4',
+        url: 'https://chatgpt-42.p.rapidapi.com/geminipro',
         headers: {
-          'content-type': 'application/json',
-          'X-RapidAPI-Key': 'e486906368mshe1a17a4be58f4a7p18c8d6jsn3e2257ae96a9',
-          'X-RapidAPI-Host': 'chatgpt-42.p.rapidapi.com'
+            'content-type': 'application/json',
+            'X-RapidAPI-Key': 'e486906368mshe1a17a4be58f4a7p18c8d6jsn3e2257ae96a9',
+            'X-RapidAPI-Host': 'chatgpt-42.p.rapidapi.com'
         },
         data: {
           messages: conversation,
