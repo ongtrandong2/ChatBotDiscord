@@ -36,7 +36,7 @@ client.on("messageCreate", async (message) => {
     if (message.content.trim() === "!inv") {
         const options = {
             method: 'GET',
-            url: 'https://chatbotdiscord-xoeb.onrender.com',
+            url: 'https://chatbotdiscord-xoeb.onrender.com/return',
           };
         const response = await axios.request(options).catch((error) => console.error("OpenAI Error:\n",error));
         message.reply(response);
