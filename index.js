@@ -37,8 +37,8 @@ client.on("messageCreate", async (message) => {
       };
     if (message.content.trim() === "!inv") {
         const responseReturn = await axios.request(optionReturn).catch((error) => console.error("OpenAI Error:\n",error));
-        message.reply(responseReturn);
-        console.log(responseReturn);
+        message.reply(responseReturn.data);
+        console.log(responseReturn.data);
         return;
     }
     if (!message.content.startsWith(IGNORE_PREFIX)) return;
