@@ -19,14 +19,14 @@ client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}`);
 });
 
-const IGNORE_PREFIX = "!";
+const IGNORE_PREFIX = "!bot";
 
 const CHANNELS = ["1225835289960779871","1225835289960779872","1225835289960779873"];
 
 
 client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
-    if (message.content.startsWith(IGNORE_PREFIX)) return;
+    if (!message.content.startsWith(IGNORE_PREFIX)) return;
     if (!CHANNELS.includes(message.channel.id) && !message.mentions.has(client.user.id)) return;
 
     await message.channel.sendTyping();
