@@ -1,9 +1,10 @@
 require('dotenv/config');
 const { Client } = require("discord.js");
-
 const axios = require('axios');
 
-
+app.listen(process.env.PORT || 3000, () => {
+    console.log("server started");
+  });
 
 const client = new Client({
     intents:['Guilds','GuildMembers','GuildMessages','MessageContent']
