@@ -23,7 +23,7 @@ client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}`);
 });
 
-const IGNORE_PREFIX = "!bot";
+const IGNORE_PREFIX = "!b";
 
 const CHANNELS = ["1225835289960779871","1225835289960779872","1226524002588033131"];
 
